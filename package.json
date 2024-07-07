@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "ollama": "^0.5.2",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "yargs": "^17.7.2"
   }
 }
