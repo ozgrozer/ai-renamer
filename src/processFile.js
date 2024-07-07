@@ -9,6 +9,8 @@ module.exports = async ({ model, _case, filePath }) => {
   try {
     const fileName = path.basename(filePath)
 
+    if (fileName === '.DS_Store') return
+
     if (!isProcessableFile({ filePath })) {
       console.log(`🟡 Unsupported file: ${fileName}`)
       return
