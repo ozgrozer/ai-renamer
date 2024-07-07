@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const processPath = require('./processPath')
 const configureYargs = require('./configureYargs')
 
