@@ -47,12 +47,14 @@ module.exports = async () => {
     config.case = argv['set-case']
     await saveConfig({ config })
     console.log(`⚪ Case set to: ${config.case}`)
+    process.exit(1)
   }
 
   if (argv['set-model']) {
     config.model = argv['set-model']
     await saveConfig({ config })
     console.log(`⚪ Model set to: ${config.model}`)
+    process.exit(1)
   }
 
   return { argv, config }
