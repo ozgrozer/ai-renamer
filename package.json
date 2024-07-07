@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "name": "ai-renamer",
+  "main": "./src/index.js",
+  "description": "Smart file renaming with AI",
+  "author": {
+    "name": "Ozgur Ozer",
+    "email": "ozgr@live.com",
+    "url": "https://github.com/ozgrozer"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "standard": "^17.1.0"
+  }
+}
