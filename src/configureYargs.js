@@ -1,9 +1,10 @@
+const os = require('os')
 const path = require('path')
 const yargs = require('yargs')
 const fs = require('fs').promises
 const { hideBin } = require('yargs/helpers')
 
-const CONFIG_FILE = path.join(process.cwd(), 'yargs-config.json')
+const CONFIG_FILE = path.join(os.homedir(), 'ai-renamer.json')
 
 const loadConfig = async () => {
   try {
