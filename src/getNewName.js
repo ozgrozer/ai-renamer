@@ -2,7 +2,18 @@ const ollama = require('ollama').default
 
 module.exports = async ({ model, _case, chars, content }) => {
   try {
-    const prompt = `Given the following file content, suggest a concise and descriptive filename in ${_case} format. Make the maximum number of characters ${chars} in the new filename. Don't include the extension. Don't include any special character. Don't include any description. Don't include any other text. Just give me the filename.\n\n${content}`
+    const prompt = `
+Generate a concise, descriptive filename for the following content:
+- Use ${_case} format
+- Maximum ${chars} characters
+- Exclude file extension
+- Avoid special characters
+- Output only the filename
+
+IMPORTANT: Your entire response should be just the filename in ${_case} format and max ${chars} characters. Do not include any other text.
+
+Content:
+${content}`
     const res = await ollama.generate({ model, prompt })
     return res.response.trim()
   } catch (err) {
