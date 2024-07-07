@@ -6,14 +6,14 @@ const configureYargs = require('./configureYargs')
 const main = async () => {
   const { argv, config } = await configureYargs()
   const [inputPath] = argv._
-  const { model, case: _case } = config
+  const { defaultCase, defaultModel, defaultChars } = config
 
   if (!inputPath) {
     console.log('🔴 Please provide a file or folder path')
     process.exit(1)
   }
 
-  await processPath({ model, _case, inputPath })
+  await processPath({ inputPath, defaultCase, defaultModel, defaultChars })
 }
 
 main()
