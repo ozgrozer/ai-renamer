@@ -37,6 +37,11 @@ module.exports = async () => {
       alias: 'm',
       type: 'string',
       description: 'Set the Ollama model to use (e.g. phi3, llama3)'
+    })
+    .option('set-chars', {
+      alias: 'x',
+      type: 'number',
+      description: 'Set the maximum number of characters in the new filename (e.g. 25)'
     }).argv
 
   if (argv.help) {
@@ -45,16 +50,23 @@ module.exports = async () => {
   }
 
   if (argv['set-case']) {
-    config.case = argv['set-case']
+    config.defaultCase = argv['set-case']
     await saveConfig({ config })
-    console.log(`⚪ Case set to: ${config.case}`)
+    console.log(`⚪ Case set to: ${config.defaultCase}`)
     process.exit(1)
   }
 
   if (argv['set-model']) {
-    config.model = argv['set-model']
+    config.defaultModel = argv['set-model']
     await saveConfig({ config })
-    console.log(`⚪ Model set to: ${config.model}`)
+    console.log(`⚪ Model set to: ${config.defaultModel}`)
+    process.exit(1)
+  }
+
+  if (argv['set-chars']) {
+    config.defaultChars = argv['set-chars']
+    await saveConfig({ config })
+    console.log(`⚪ Chars set to: ${config.defaultChars}`)
     process.exit(1)
   }
 
