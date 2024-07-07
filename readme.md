@@ -5,6 +5,10 @@ A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intellige
 [![npm](https://img.shields.io/npm/v/ai-renamer.svg?style=flat-square)](https://www.npmjs.com/package/ai-renamer)
 [![license](https://img.shields.io/npm/l/ai-renamer?style=flat-square)](https://github.com/ozgrozer/ai-renamer/blob/main/license)
 
+## Preview
+
+https://github.com/ozgrozer/ai-renamer/assets/651938/7ac84a2d-8e05-4756-8827-3bd746b3edae
+
 ## Usage
 
 You need to have [Ollama](https://ollama.com/download) and at least one LLM (Llama, Gemma etc.) installed on your system
