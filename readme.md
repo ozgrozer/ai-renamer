@@ -7,6 +7,8 @@ A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intellige
 
 ## Usage
 
+You need [Ollama](https://ollama.com/download) and at least one LLM (Llama, Gemma etc.) installed on your system
+
 Run with NPX
 
 ```bash
