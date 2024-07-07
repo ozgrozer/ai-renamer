@@ -25,6 +25,20 @@ npm install -g ai-renamer
 ai-renamer /path
 ```
 
+## Params
+
+```bash
+npx ai-renamer --help
+Options:
+  -h, --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
+  -c, --set-case   Set the case style (e.g. camelCase, PascalCase, snake_case,
+                   kebab-case, lower_case, UPPER_CASE)                  [string]
+  -m, --set-model  Set the Ollama model to use (e.g. phi3, llama3)      [string]
+  -x, --set-chars  Set the maximum number of characters in the new filename
+                   (e.g. 25)                                            [number]
+```
+
 ## Contribution
 
 Feel free to contribute. Open a new [issue](https://github.com/ozgrozer/ai-renamer/issues), or make a [pull request](https://github.com/ozgrozer/ai-renamer/pulls).
