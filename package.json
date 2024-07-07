@@ -14,6 +14,7 @@
     "standard": "^17.1.0"
   },
   "dependencies": {
+    "ollama": "^0.5.2",
     "pdf-parse": "^1.1.1"
   }
 }
