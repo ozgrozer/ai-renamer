@@ -15,11 +15,6 @@ module.exports = async ({ filePath }) => {
       content = fs.readFile(filePath, 'utf8')
     }
 
-    if (!content) {
-      console.log(`No text content found: ${filePath}`)
-      return
-    }
-
     return content
   } catch (err) {
     throw new Error(err.message)

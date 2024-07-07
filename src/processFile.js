@@ -12,7 +12,11 @@ module.exports = async ({ filePath }) => {
     }
 
     const content = await readFileContent({ filePath })
-    console.log(content)
+    if (!content) {
+      console.log(`No text content: ${filePath}`)
+      return
+    }
+
     const newName = 'test'
 
     const dir = path.dirname(filePath)
