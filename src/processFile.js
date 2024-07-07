@@ -7,7 +7,7 @@ const isProcessableFile = require('./isProcessableFile')
 module.exports = async ({ filePath }) => {
   try {
     if (!isProcessableFile({ filePath })) {
-      console.log(`Skipping non-processable file: ${filePath}`)
+      console.log(`Skipping file: ${filePath}`)
       return
     }
 
@@ -21,6 +21,6 @@ module.exports = async ({ filePath }) => {
     await fs.rename(filePath, newPath)
     console.log(`Renamed ${filePath} to ${newPath}`)
   } catch (err) {
-    console.log(`Error processing ${filePath}:`, err.message)
+    throw new Error(err.message)
   }
 }

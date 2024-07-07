@@ -20,6 +20,6 @@ module.exports = async ({ inputPath }) => {
       await processFile({ filePath: inputPath })
     }
   } catch (err) {
-    console.log('Error:', err.message)
+    console.log(err.message)
   }
 }

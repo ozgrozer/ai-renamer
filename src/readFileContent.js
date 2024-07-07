@@ -3,13 +3,24 @@ const pdf = require('pdf-parse')
 const fs = require('fs').promises
 
 module.exports = async ({ filePath }) => {
-  const ext = path.extname(filePath).toLowerCase()
+  try {
+    const ext = path.extname(filePath).toLowerCase()
 
-  if (ext === '.pdf') {
-    const dataBuffer = await fs.readFile(filePath)
-    const pdfData = await pdf(dataBuffer)
-    return pdfData.text
-  } else {
-    return fs.readFile(filePath, 'utf8')
+    let content = ''
+    if (ext === '.pdf') {
+      const dataBuffer = await fs.readFile(filePath)
+      const pdfData = await pdf(dataBuffer)
+      content = pdfData.text.trim()
+    } else {
+      content = fs.readFile(filePath, 'utf8')
+    }
+
+    if (!content) {
+      throw new Error(`No text content found: ${filePath}`)
+    }
+
+    return content
+  } catch (err) {
+    throw new Error(err.message)
   }
 }
