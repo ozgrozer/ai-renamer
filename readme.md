@@ -41,6 +41,7 @@ Options:
   -m, --set-model  Set the Ollama model to use (e.g. phi3, llama3)      [string]
   -x, --set-chars  Set the maximum number of characters in the new filename
                    (e.g. 25)                                            [number]
+  -l, --set-language  Set the output language (e.g. English, Turkish)   [string]
 ```
 
 ## Contribution

@@ -42,6 +42,11 @@ module.exports = async () => {
       alias: 'x',
       type: 'number',
       description: 'Set the maximum number of characters in the new filename (e.g. 25)'
+    })
+    .option('set-language', {
+      alias: 'l',
+      type: 'string',
+      description: 'Set the output language (e.g. English, Turkish)'
     }).argv
 
   if (argv.help) {
@@ -67,6 +72,13 @@ module.exports = async () => {
     config.defaultChars = argv['set-chars']
     await saveConfig({ config })
     console.log(`⚪ Chars set to: ${config.defaultChars}`)
+    process.exit(1)
+  }
+
+  if (argv['set-language']) {
+    config.defaultLanguage = argv['set-language']
+    await saveConfig({ config })
+    console.log(`⚪ Language set to: ${config.defaultLanguage}`)
     process.exit(1)
   }
 
