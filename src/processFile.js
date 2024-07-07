@@ -5,7 +5,7 @@ const getNewName = require('./getNewName')
 const readFileContent = require('./readFileContent')
 const isProcessableFile = require('./isProcessableFile')
 
-module.exports = async ({ model, _case, filePath }) => {
+module.exports = async ({ model, _case, chars, filePath }) => {
   try {
     const fileName = path.basename(filePath)
 
@@ -22,7 +22,7 @@ module.exports = async ({ model, _case, filePath }) => {
       return
     }
 
-    const newName = await getNewName({ model, _case, content })
+    const newName = await getNewName({ model, _case, chars, content })
     if (!newName) {
       console.log(`🔴 No new name: ${fileName}`)
       return

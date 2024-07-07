@@ -25,11 +25,11 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars }) 
         const filePath = path.join(inputPath, file)
         const fileStats = await fs.stat(filePath)
         if (fileStats.isFile()) {
-          await processFile({ model, _case, filePath })
+          await processFile({ model, _case, chars, filePath })
         }
       }
     } else if (stats.isFile()) {
-      await processFile({ model, _case, filePath: inputPath })
+      await processFile({ model, _case, chars, filePath: inputPath })
     }
   } catch (err) {
     console.log(err.message)
