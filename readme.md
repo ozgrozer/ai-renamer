@@ -1,6 +1,6 @@
 # ai-renamer
 
-A Node.js CLI tool that uses Ollama models (Llama3 or Phi3) to intelligently rename files in a specified directory
+A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intelligently rename files in a specified directory
 
 ## Usage
 

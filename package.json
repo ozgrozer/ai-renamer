@@ -3,7 +3,7 @@
   "license": "GPL-3.0",
   "name": "ai-renamer",
   "main": "./src/index.js",
-  "description": "A Node.js CLI tool that uses Ollama models (Llama3 or Phi3) to intelligently rename files in a specified directory",
+  "description": "A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intelligently rename files in a specified directory",
   "author": {
     "name": "Ozgur Ozer",
     "email": "ozgr@live.com",
