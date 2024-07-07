@@ -4,7 +4,7 @@ const main = async () => {
   const inputPath = process.argv[2]
 
   if (!inputPath) {
-    console.log('⚪ Please provide a file or folder path')
+    console.log('🔴 Please provide a file or folder path')
     process.exit(1)
   }
 
