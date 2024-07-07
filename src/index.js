@@ -11,7 +11,7 @@ const main = async () => {
     process.exit(1)
   }
 
-  await processPath({ model, inputPath, case: _case })
+  await processPath({ model, _case, inputPath })
 }
 
 main()

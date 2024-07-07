@@ -4,9 +4,9 @@ const fs = require('fs').promises
 const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 
-module.exports = async ({ inputPath }) => {
+module.exports = async ({ model: defaultModel, _case, inputPath }) => {
   try {
-    const model = await chooseModel()
+    const model = defaultModel || await chooseModel()
 
     const stats = await fs.stat(inputPath)
 
@@ -16,11 +16,11 @@ module.exports = async ({ inputPath }) => {
         const filePath = path.join(inputPath, file)
         const fileStats = await fs.stat(filePath)
         if (fileStats.isFile()) {
-          await processFile({ model, filePath })
+          await processFile({ model, _case, filePath })
         }
       }
     } else if (stats.isFile()) {
-      await processFile({ model, filePath: inputPath })
+      await processFile({ model, _case, filePath: inputPath })
     }
   } catch (err) {
     console.log(err.message)
