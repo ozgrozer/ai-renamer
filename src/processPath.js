@@ -4,9 +4,13 @@ const fs = require('fs').promises
 const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 
-module.exports = async ({ model: defaultModel, _case, inputPath }) => {
+module.exports = async ({ model: defaultModel, _case: defaultCase, inputPath }) => {
   try {
     const model = defaultModel || await chooseModel()
+    console.log(`⚪ Chosen model: ${model}`)
+
+    const _case = defaultCase || 'kebab-case'
+    console.log(`⚪ Chosen case: ${_case}`)
 
     const stats = await fs.stat(inputPath)
 

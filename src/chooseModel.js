@@ -36,7 +36,6 @@ module.exports = async () => {
     console.log(`⚪ Available models: ${models.map(m => m.name).join(', ')}`)
 
     const model = await chooseModel({ models })
-    console.log(`⚪ Chosen model: ${model}`)
     if (!model) throw new Error('🔴 No suitable model found')
 
     return model
