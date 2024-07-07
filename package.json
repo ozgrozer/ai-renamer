@@ -12,5 +12,8 @@
   "keywords": [],
   "devDependencies": {
     "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
   }
 }
