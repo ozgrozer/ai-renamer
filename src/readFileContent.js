@@ -16,7 +16,8 @@ module.exports = async ({ filePath }) => {
     }
 
     if (!content) {
-      throw new Error(`No text content found: ${filePath}`)
+      console.log(`No text content found: ${filePath}`)
+      return
     }
 
     return content
