@@ -1,7 +1,7 @@
 const path = require('path')
-const fs = require('fs').promises
 
 const isImage = require('./isImage')
+const saveFile = require('./saveFile')
 const getNewName = require('./getNewName')
 const readFileContent = require('./readFileContent')
 const isProcessableFile = require('./isProcessableFile')
@@ -36,10 +36,7 @@ module.exports = async ({ model, _case, chars, language, filePath }) => {
       return
     }
 
-    const dir = path.dirname(filePath)
-    const newFileName = newName + ext
-    const newPath = path.join(dir, newFileName)
-    await fs.rename(filePath, newPath)
+    const newFileName = await saveFile({ ext, newName, filePath })
     console.log(`🟢 Renamed: ${fileName} to ${newFileName}`)
   } catch (err) {
     throw new Error(err.message)
