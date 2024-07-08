@@ -1,5 +1,5 @@
 {
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "GPL-3.0",
   "name": "ai-renamer",
   "main": "./src/index.js",
