@@ -1,4 +1,4 @@
 module.exports = ({ ext }) => {
-  const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tif', '.tiff', '.webp', '.svg', '.eps']
+  const imageTypes = ['.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff']
   return imageTypes.includes(ext)
 }

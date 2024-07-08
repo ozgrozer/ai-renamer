@@ -24,7 +24,7 @@ module.exports = [
   '.txt', '.log', '.diff', '.patch', '.proto', '.tex',
 
   // image files
-  '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tif', '.tiff', '.webp', '.svg', '.eps',
+  '.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff',
 
   // handled separately in code
   '.pdf'
