@@ -50,7 +50,7 @@ module.exports = async () => {
     })
     .option('set-include-subdirectories', {
       alias: 's',
-      type: 'boolean',
+      type: 'string',
       description: 'Include files in subdirectories when processing (e.g: true, false)'
     }).argv
 
@@ -62,36 +62,26 @@ module.exports = async () => {
   if (argv['set-case']) {
     config.defaultCase = argv['set-case']
     await saveConfig({ config })
-    console.log(`⚪ Case set to: ${config.defaultCase}`)
-    process.exit(1)
   }
 
   if (argv['set-model']) {
     config.defaultModel = argv['set-model']
     await saveConfig({ config })
-    console.log(`⚪ Model set to: ${config.defaultModel}`)
-    process.exit(1)
   }
 
   if (argv['set-chars']) {
     config.defaultChars = argv['set-chars']
     await saveConfig({ config })
-    console.log(`⚪ Chars set to: ${config.defaultChars}`)
-    process.exit(1)
   }
 
   if (argv['set-language']) {
     config.defaultLanguage = argv['set-language']
     await saveConfig({ config })
-    console.log(`⚪ Language set to: ${config.defaultLanguage}`)
-    process.exit(1)
   }
 
   if (argv['set-include-subdirectories']) {
     config.defaultIncludeSubdirectories = argv['set-include-subdirectories']
     await saveConfig({ config })
-    console.log(`⚪ Include subdirectories set to: ${config.defaultIncludeSubdirectories}`)
-    process.exit(1)
   }
 
   return { argv, config }

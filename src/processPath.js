@@ -18,7 +18,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     const language = defaultLanguage || 'English'
     console.log(`⚪ Chosen language: ${language}`)
 
-    const includeSubdirectories = defaultIncludeSubdirectories || false
+    const includeSubdirectories = defaultIncludeSubdirectories === 'true' || false
     console.log(`⚪ Include subdirectories: ${includeSubdirectories}`)
 
     console.log('--------------------------------------------------')
