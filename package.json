@@ -3,7 +3,9 @@
   "license": "GPL-3.0",
   "name": "ai-renamer",
   "main": "./src/index.js",
-  "bin": { "ai-renamer": "./src/index.js" },
+  "bin": {
+    "ai-renamer": "./src/index.js"
+  },
   "description": "A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intelligently rename files in a specified directory",
   "author": {
     "name": "Ozgur Ozer",
@@ -11,6 +13,7 @@
     "url": "https://github.com/ozgrozer"
   },
   "dependencies": {
+    "change-case": "^5.4.4",
     "ollama": "^0.5.2",
     "pdf-parse": "^1.1.1",
     "yargs": "^17.7.2"
