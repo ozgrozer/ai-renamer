@@ -36,12 +36,36 @@ npx ai-renamer --help
 Options:
   -h, --help          Show help                                        [boolean]
       --version       Show version number                              [boolean]
-  -c, --set-case      Set the case style (e.g. camelCase, PascalCase,
-                      snake_case, kebab-case)                           [string]
+  -c, --set-case      Set the case style (e.g. camelCase, pascalCase,
+                      snakeCase, kebabCase)                           [string]
   -m, --set-model     Set the Ollama model to use (e.g. gemma2, llama3) [string]
   -x, --set-chars     Set the maximum number of characters in the new filename
                       (e.g. 25)                                         [number]
   -l, --set-language  Set the output language (e.g. English, Turkish)   [string]
+```
+
+To get the model name to use in `--set-model`
+
+```bash
+ollama list
+```
+
+`ai-renamer` uses `change-case` library for text casing
+
+```bash
+# value: result
+camelCase: twoWords
+capitalCase: Two Words
+constantCase: TWO_WORDS
+dotCase: two.words
+kebabCase: two-words
+noCase: two words
+pascalCase: TwoWords
+pascalSnakeCase: Two_Words
+pathCase: two/words
+sentenceCase: Two words
+snakeCase: two_words
+trainCase: Two-Words
 ```
 
 ## Contribution
