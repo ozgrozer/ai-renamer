@@ -47,6 +47,11 @@ module.exports = async () => {
       alias: 'l',
       type: 'string',
       description: 'Set the output language (e.g. English, Turkish)'
+    })
+    .option('set-include-subdirectories', {
+      alias: 's',
+      type: 'boolean',
+      description: 'Include files in subdirectories when processing (e.g: true, false)'
     }).argv
 
   if (argv.help) {
@@ -79,6 +84,13 @@ module.exports = async () => {
     config.defaultLanguage = argv['set-language']
     await saveConfig({ config })
     console.log(`⚪ Language set to: ${config.defaultLanguage}`)
+    process.exit(1)
+  }
+
+  if (argv['set-include-subdirectories']) {
+    config.defaultIncludeSubdirectories = argv['set-include-subdirectories']
+    await saveConfig({ config })
+    console.log(`⚪ Include subdirectories set to: ${config.defaultIncludeSubdirectories}`)
     process.exit(1)
   }
 

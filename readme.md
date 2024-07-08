@@ -40,14 +40,18 @@ ai-renamer /path
 ```bash
 npx ai-renamer --help
 Options:
-  -h, --help          Show help                                        [boolean]
-      --version       Show version number                              [boolean]
-  -c, --set-case      Set the case style (e.g. camelCase, pascalCase,
-                      snakeCase, kebabCase)                           [string]
-  -m, --set-model     Set the Ollama model to use (e.g. gemma2, llama3) [string]
-  -x, --set-chars     Set the maximum number of characters in the new filename
-                      (e.g. 25)                                         [number]
-  -l, --set-language  Set the output language (e.g. English, Turkish)   [string]
+  -h, --help                        Show help                          [boolean]
+      --version                     Show version number                [boolean]
+  -c, --set-case                    Set the case style (e.g. camelCase,
+                                    pascalCase, snakeCase, kebabCase)   [string]
+  -m, --set-model                   Set the Ollama model to use (e.g. gemma2,
+                                    llama3)                             [string]
+  -x, --set-chars                   Set the maximum number of characters in the
+                                    new filename (e.g. 25)              [number]
+  -l, --set-language                Set the output language (e.g. English,
+                                    Turkish)                            [string]
+  -s, --set-include-subdirectories  Include files in subdirectories when
+                                    processing (e.g: true, false)      [boolean]
 ```
 
 To get the model name to use in `--set-model`

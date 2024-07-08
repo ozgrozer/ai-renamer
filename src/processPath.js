@@ -1,10 +1,10 @@
-const path = require('path')
 const fs = require('fs').promises
 
 const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
+const processDirectory = require('./processDirectory')
 
-module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultLanguage }) => {
+module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultLanguage, defaultIncludeSubdirectories }) => {
   try {
     const model = defaultModel || await chooseModel()
     console.log(`⚪ Chosen model: ${model}`)
@@ -18,21 +18,18 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     const language = defaultLanguage || 'English'
     console.log(`⚪ Chosen language: ${language}`)
 
+    const includeSubdirectories = defaultIncludeSubdirectories || false
+    console.log(`⚪ Include subdirectories: ${includeSubdirectories}`)
+
     console.log('--------------------------------------------------')
 
     const stats = await fs.stat(inputPath)
+    const options = { model, _case, chars, language, includeSubdirectories }
 
     if (stats.isDirectory()) {
-      const files = await fs.readdir(inputPath)
-      for (const file of files) {
-        const filePath = path.join(inputPath, file)
-        const fileStats = await fs.stat(filePath)
-        if (fileStats.isFile()) {
-          await processFile({ model, _case, chars, language, filePath })
-        }
-      }
+      await processDirectory({ options, inputPath })
     } else if (stats.isFile()) {
-      await processFile({ model, _case, chars, language, filePath: inputPath })
+      await processFile({ ...options, filePath: inputPath })
     }
   } catch (err) {
     console.log(err.message)
