@@ -1,5 +1,7 @@
 const ollama = require('ollama').default
 
+const changeCase = require('./changeCase')
+
 module.exports = async ({ model, _case, chars, content, language, images }) => {
   try {
     const promptLines = [
@@ -21,7 +23,9 @@ module.exports = async ({ model, _case, chars, content, language, images }) => {
     const prompt = promptLines.join('\n')
 
     const res = await ollama.generate({ model, prompt, images })
-    return res.response.trim()
+    const text = res.response.trim()
+    const filename = await changeCase({ text, _case })
+    return filename
   } catch (err) {
     throw new Error(err.message)
   }
