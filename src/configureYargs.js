@@ -31,7 +31,7 @@ module.exports = async () => {
     .option('set-case', {
       alias: 'c',
       type: 'string',
-      description: 'Set the case style (e.g. camelCase, PascalCase, snake_case, kebab-case)'
+      description: 'Set the case style (e.g. camelCase, pascalCase, snakeCase, kebabCase)'
     })
     .option('set-model', {
       alias: 'm',
