@@ -9,7 +9,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     const model = defaultModel || await chooseModel()
     console.log(`⚪ Chosen model: ${model}`)
 
-    const _case = defaultCase || 'kebab-case'
+    const _case = defaultCase || 'kebabCase'
     console.log(`⚪ Chosen case: ${_case}`)
 
     const chars = defaultChars || 20
