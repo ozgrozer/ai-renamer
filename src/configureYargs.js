@@ -31,12 +31,12 @@ module.exports = async () => {
     .option('set-case', {
       alias: 'c',
       type: 'string',
-      description: 'Set the case style (e.g. camelCase, PascalCase, snake_case, kebab-case, lower_case, UPPER_CASE)'
+      description: 'Set the case style (e.g. camelCase, PascalCase, snake_case, kebab-case)'
     })
     .option('set-model', {
       alias: 'm',
       type: 'string',
-      description: 'Set the Ollama model to use (e.g. phi3, llama3)'
+      description: 'Set the Ollama model to use (e.g. gemma2, llama3)'
     })
     .option('set-chars', {
       alias: 'x',
