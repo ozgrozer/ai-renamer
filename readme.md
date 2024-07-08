@@ -37,8 +37,8 @@ Options:
   -h, --help          Show help                                        [boolean]
       --version       Show version number                              [boolean]
   -c, --set-case      Set the case style (e.g. camelCase, PascalCase,
-                      snake_case, kebab-case, lower_case, UPPER_CASE)   [string]
-  -m, --set-model     Set the Ollama model to use (e.g. phi3, llama3)   [string]
+                      snake_case, kebab-case)                           [string]
+  -m, --set-model     Set the Ollama model to use (e.g. gemma2, llama3) [string]
   -x, --set-chars     Set the maximum number of characters in the new filename
                       (e.g. 25)                                         [number]
   -l, --set-language  Set the output language (e.g. English, Turkish)   [string]
