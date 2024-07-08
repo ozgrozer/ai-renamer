@@ -7,6 +7,12 @@ A Node.js CLI tool that uses Ollama models (Llama, Gemma, Phi etc.) to intellige
 
 ## Preview
 
+Rename images
+
+https://github.com/ozgrozer/ai-renamer/assets/651938/0d229179-8385-4f17-a9fb-44d40c79d1e9
+
+Rename files
+
 https://github.com/ozgrozer/ai-renamer/assets/651938/7ac84a2d-8e05-4756-8827-3bd746b3edae
 
 ## Usage
