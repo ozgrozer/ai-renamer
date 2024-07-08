@@ -50,7 +50,7 @@ To get the model name to use in `--set-model`
 ollama list
 ```
 
-`ai-renamer` uses `change-case` library for text casing
+`ai-renamer` uses `change-case` library for case styling
 
 ```bash
 # value: result
