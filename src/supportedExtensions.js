@@ -20,6 +20,9 @@ module.exports = [
   // template languages
   '.ejs', '.pug', '.jade', '.hbs', '.twig', '.liquid',
 
+  // notebooks
+  '.ipynb',
+
   // other
   '.txt', '.log', '.diff', '.patch', '.proto', '.tex',
 
