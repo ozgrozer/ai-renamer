@@ -23,7 +23,8 @@ module.exports = async ({ model, _case, chars, content, language, images }) => {
     const prompt = promptLines.join('\n')
 
     const res = await ollama.generate({ model, prompt, images })
-    const text = res.response.trim()
+    const maxChars = chars + 10
+    const text = res.response.trim().slice(-maxChars)
     const filename = await changeCase({ text, _case })
     return filename
   } catch (err) {
