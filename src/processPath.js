@@ -24,7 +24,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     console.log('--------------------------------------------------')
 
     const stats = await fs.stat(inputPath)
-    const options = { model, _case, chars, language, includeSubdirectories }
+    const options = { model, _case, chars, language, inputPath, includeSubdirectories }
 
     if (stats.isDirectory()) {
       await processDirectory({ options, inputPath })
