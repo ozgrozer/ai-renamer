@@ -12,6 +12,10 @@
     "email": "ozgr@live.com",
     "url": "https://github.com/ozgrozer"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozgrozer/ai-renamer.git"
+  },
   "dependencies": {
     "change-case": "^5.4.4",
     "ollama": "^0.5.2",
