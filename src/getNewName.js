@@ -5,21 +5,20 @@ const changeCase = require('./changeCase')
 
 const getModelResult = async ({ model, prompt, images: _images }) => {
   try {
-    const messages = [{ role: 'user', content: prompt }]
-
+    const images = []
     if (_images && _images.length > 0) {
       const imageData = await fs.readFileSync(_images[0])
-      messages[0].images = [imageData.toString('base64')]
+      images.push(imageData.toString('base64'))
     }
 
     const apiResult = await axios({
       method: 'post',
-      data: { model, messages, stream: false },
+      url: 'http://127.0.0.1:11434/api/generate',
       headers: { 'Content-Type': 'application/json' },
-      url: 'http://127.0.0.1:11434/v1/chat/completions'
+      data: { model, prompt, images, stream: false }
     })
 
-    return apiResult.data.choices[0].message.content
+    return apiResult.data.response
   } catch (err) {
     throw new Error(err?.response?.data?.error || err.message)
   }
