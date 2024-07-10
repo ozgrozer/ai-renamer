@@ -1,6 +1,28 @@
-const ollama = require('ollama').default
+const fs = require('fs')
+const axios = require('axios')
 
 const changeCase = require('./changeCase')
+
+const getModelResult = async ({ model, prompt, images: _images }) => {
+  try {
+    const images = []
+    if (_images && _images.length > 0) {
+      const imageData = await fs.readFileSync(_images[0])
+      images.push(imageData.toString('base64'))
+    }
+
+    const apiResult = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:11434/api/generate',
+      data: { model, prompt, images, stream: false },
+      headers: { 'Content-Type': 'application/json' }
+    })
+
+    return apiResult.data.response
+  } catch (err) {
+    throw new Error(err?.response?.data?.error || err.message)
+  }
+}
 
 module.exports = async ({ model, _case, chars, content, language, images, relativeFilePath }) => {
   try {
@@ -22,12 +44,13 @@ module.exports = async ({ model, _case, chars, content, language, images, relati
 
     const prompt = promptLines.join('\n')
 
-    const res = await ollama.generate({ model, prompt, images })
+    const modelResult = await getModelResult({ model, prompt, images })
+
     const maxChars = chars + 10
-    const text = res.response.trim().slice(-maxChars)
+    const text = modelResult.trim().slice(-maxChars)
     const filename = await changeCase({ text, _case })
     return filename
   } catch (err) {
-    console.log(`🔴 Ollama error: ${err.message} (${relativeFilePath})`)
+    console.log(`🔴 Model error: ${err.message} (${relativeFilePath})`)
   }
 }
