@@ -20,7 +20,6 @@
     "axios": "^1.7.2",
     "change-case": "^5.4.4",
     "ollama": "^0.5.2",
-    "openai": "^4.52.5",
     "pdf-parse": "^1.1.1",
     "yargs": "^17.7.2"
   },

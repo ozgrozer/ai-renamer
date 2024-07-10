@@ -1,10 +1,5 @@
 const fs = require('fs')
-const OpenAI = require('openai')
-
-const openai = new OpenAI({
-  apiKey: 'local',
-  baseURL: 'http://127.0.0.1:11434/v1'
-})
+const axios = require('axios')
 
 const changeCase = require('./changeCase')
 
@@ -14,16 +9,17 @@ const getModelResult = async ({ model, prompt, images: _images }) => {
 
     if (_images && _images.length > 0) {
       const imageData = await fs.readFileSync(_images[0])
-      messages[0].images = imageData.toString('base64')
+      messages[0].images = [imageData.toString('base64')]
     }
 
-    const completion = await openai.chat.completions.create({
-      model,
-      messages,
-      stream: false
+    const apiResult = await axios({
+      method: 'post',
+      data: { model, messages, stream: false },
+      headers: { 'Content-Type': 'application/json' },
+      url: 'http://127.0.0.1:11434/v1/chat/completions'
     })
 
-    return completion.choices[0].message.content
+    return apiResult.data.choices[0].message.content
   } catch (err) {
     throw new Error(err?.response?.data?.error || err.message)
   }
