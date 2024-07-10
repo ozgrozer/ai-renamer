@@ -28,37 +28,37 @@ module.exports = async () => {
       type: 'boolean',
       description: 'Show help'
     })
-    .option('set-platform', {
+    .option('platform', {
       alias: 'p',
       type: 'string',
       description: 'Set the model platform (e.g. ollama, lm-studio)'
     })
-    .option('set-base-url', {
+    .option('base-url', {
       alias: 'u',
       type: 'string',
       description: 'Set the API base URL (e.g. http://127.0.0.1:11434 for ollama)'
     })
-    .option('set-model', {
+    .option('model', {
       alias: 'm',
       type: 'string',
       description: 'Set the model to use (e.g. gemma2, llama3)'
     })
-    .option('set-case', {
+    .option('case', {
       alias: 'c',
       type: 'string',
       description: 'Set the case style (e.g. camelCase, pascalCase, snakeCase, kebabCase)'
     })
-    .option('set-chars', {
+    .option('chars', {
       alias: 'x',
       type: 'number',
       description: 'Set the maximum number of characters in the new filename (e.g. 25)'
     })
-    .option('set-language', {
+    .option('language', {
       alias: 'l',
       type: 'string',
       description: 'Set the output language (e.g. English, Turkish)'
     })
-    .option('set-include-subdirectories', {
+    .option('include-subdirectories', {
       alias: 's',
       type: 'string',
       description: 'Include files in subdirectories when processing (e.g: true, false)'
@@ -69,38 +69,38 @@ module.exports = async () => {
     process.exit(0)
   }
 
-  if (argv['set-platform']) {
-    config.defaultPlatform = argv['set-platform']
+  if (argv.platform) {
+    config.defaultPlatform = argv.platform
     await saveConfig({ config })
   }
 
-  if (argv['set-base-url']) {
-    config.defaultBaseURL = argv['set-base-url']
+  if (argv['base-url']) {
+    config.defaultBaseURL = argv['base-url']
     await saveConfig({ config })
   }
 
-  if (argv['set-model']) {
-    config.defaultModel = argv['set-model']
+  if (argv.model) {
+    config.defaultModel = argv.model
     await saveConfig({ config })
   }
 
-  if (argv['set-case']) {
-    config.defaultCase = argv['set-case']
+  if (argv.case) {
+    config.defaultCase = argv.case
     await saveConfig({ config })
   }
 
-  if (argv['set-chars']) {
-    config.defaultChars = argv['set-chars']
+  if (argv.chars) {
+    config.defaultChars = argv.chars
     await saveConfig({ config })
   }
 
-  if (argv['set-language']) {
-    config.defaultLanguage = argv['set-language']
+  if (argv.language) {
+    config.defaultLanguage = argv.language
     await saveConfig({ config })
   }
 
-  if (argv['set-include-subdirectories']) {
-    config.defaultIncludeSubdirectories = argv['set-include-subdirectories']
+  if (argv['include-subdirectories']) {
+    config.defaultIncludeSubdirectories = argv['include-subdirectories']
     await saveConfig({ config })
   }
 
