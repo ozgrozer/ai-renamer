@@ -3,28 +3,63 @@ const axios = require('axios')
 
 const changeCase = require('./changeCase')
 
-const getModelResult = async ({ model, prompt, images: _images }) => {
+const getModelResult = async ({ model, prompt, images: _images, baseURL, platform }) => {
   try {
-    const images = []
-    if (_images && _images.length > 0) {
-      const imageData = await fs.readFileSync(_images[0])
-      images.push(imageData.toString('base64'))
+    let url
+    if (platform === 'ollama') {
+      url = `${baseURL}/api/generate`
+    } else if (platform === 'lm-studio') {
+      url = `${baseURL}/v1/chat/completions`
+    }
+
+    const data = {
+      model,
+      stream: false
+    }
+
+    if (platform === 'ollama') {
+      data.prompt = prompt
+      if (_images && _images.length > 0) {
+        const imageData = await fs.readFileSync(_images[0])
+        data.images = [imageData.toString('base64')]
+      }
+    } else if (platform === 'lm-studio') {
+      const messages = [{
+        role: 'user',
+        content: [
+          { type: 'text', text: prompt }
+        ]
+      }]
+      if (_images && _images.length > 0) {
+        const imageData = await fs.readFileSync(_images[0])
+        messages[0].content.push({
+          type: 'image_url',
+          image_url: { url: `data:image/jpeg;base64,${imageData.toString('base64')}` }
+        })
+      }
+      data.messages = messages
     }
 
     const apiResult = await axios({
+      url,
+      data,
       method: 'post',
-      url: 'http://127.0.0.1:11434/api/generate',
-      headers: { 'Content-Type': 'application/json' },
-      data: { model, prompt, images, stream: false }
+      headers: { 'Content-Type': 'application/json' }
     })
 
-    return apiResult.data.response
+    let result
+    if (platform === 'ollama') {
+      result = apiResult.data.response
+    } else if (platform === 'lm-studio') {
+      result = apiResult.data.choices[0].message.content
+    }
+    return result
   } catch (err) {
     throw new Error(err?.response?.data?.error || err.message)
   }
 }
 
-module.exports = async ({ model, _case, chars, content, language, images, relativeFilePath }) => {
+module.exports = async ({ model, _case, chars, images, content, baseURL, language, platform, relativeFilePath }) => {
   try {
     const promptLines = [
       'Generate a concise, descriptive filename for the following content:',
@@ -44,7 +79,7 @@ module.exports = async ({ model, _case, chars, content, language, images, relati
 
     const prompt = promptLines.join('\n')
 
-    const modelResult = await getModelResult({ model, prompt, images })
+    const modelResult = await getModelResult({ model, prompt, images, baseURL, platform })
 
     const maxChars = chars + 10
     const text = modelResult.trim().slice(-maxChars)

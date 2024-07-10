@@ -28,15 +28,25 @@ module.exports = async () => {
       type: 'boolean',
       description: 'Show help'
     })
-    .option('set-case', {
-      alias: 'c',
+    .option('set-platform', {
+      alias: 'p',
       type: 'string',
-      description: 'Set the case style (e.g. camelCase, pascalCase, snakeCase, kebabCase)'
+      description: 'Set the model platform (e.g. ollama, lm-studio)'
+    })
+    .option('set-base-url', {
+      alias: 'u',
+      type: 'string',
+      description: 'Set the API base URL (e.g. http://127.0.0.1:11434 for ollama)'
     })
     .option('set-model', {
       alias: 'm',
       type: 'string',
-      description: 'Set the Ollama model to use (e.g. gemma2, llama3)'
+      description: 'Set the model to use (e.g. gemma2, llama3)'
+    })
+    .option('set-case', {
+      alias: 'c',
+      type: 'string',
+      description: 'Set the case style (e.g. camelCase, pascalCase, snakeCase, kebabCase)'
     })
     .option('set-chars', {
       alias: 'x',
@@ -59,13 +69,23 @@ module.exports = async () => {
     process.exit(0)
   }
 
-  if (argv['set-case']) {
-    config.defaultCase = argv['set-case']
+  if (argv['set-platform']) {
+    config.defaultPlatform = argv['set-platform']
+    await saveConfig({ config })
+  }
+
+  if (argv['set-base-url']) {
+    config.defaultBaseURL = argv['set-base-url']
     await saveConfig({ config })
   }
 
   if (argv['set-model']) {
     config.defaultModel = argv['set-model']
+    await saveConfig({ config })
+  }
+
+  if (argv['set-case']) {
+    config.defaultCase = argv['set-case']
     await saveConfig({ config })
   }
 
