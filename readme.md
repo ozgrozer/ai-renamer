@@ -51,7 +51,7 @@ Options:
   -l, --set-language                Set the output language (e.g. English,
                                     Turkish)                            [string]
   -s, --set-include-subdirectories  Include files in subdirectories when
-                                    processing (e.g: true, false)      [boolean]
+                                    processing (e.g: true, false)       [string]
 ```
 
 To get the model name to use in `--set-model`
