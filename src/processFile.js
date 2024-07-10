@@ -31,16 +31,13 @@ module.exports = async ({ model, _case, chars, language, filePath, inputPath }) 
       }
     }
 
-    const newName = await getNewName({ model, _case, chars, content, language, images })
-    if (!newName) {
-      console.log(`🔴 No new name: ${relativeFilePath}`)
-      return
-    }
+    const newName = await getNewName({ model, _case, chars, content, language, images, relativeFilePath })
+    if (!newName) return
 
     const newFileName = await saveFile({ ext, newName, filePath })
     const relativeNewFilePath = path.join(path.dirname(relativeFilePath), newFileName)
     console.log(`🟢 Renamed: ${relativeFilePath} to ${relativeNewFilePath}`)
   } catch (err) {
-    throw new Error(err.message)
+    console.log(err.message)
   }
 }

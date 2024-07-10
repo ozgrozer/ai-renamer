@@ -2,7 +2,7 @@ const ollama = require('ollama').default
 
 const changeCase = require('./changeCase')
 
-module.exports = async ({ model, _case, chars, content, language, images }) => {
+module.exports = async ({ model, _case, chars, content, language, images, relativeFilePath }) => {
   try {
     const promptLines = [
       'Generate a concise, descriptive filename for the following content:',
@@ -28,6 +28,6 @@ module.exports = async ({ model, _case, chars, content, language, images }) => {
     const filename = await changeCase({ text, _case })
     return filename
   } catch (err) {
-    throw new Error(err.message)
+    console.log(`🔴 Ollama error: ${err.message} (${relativeFilePath})`)
   }
 }
