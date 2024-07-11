@@ -31,7 +31,7 @@ module.exports = async () => {
     .option('platform', {
       alias: 'p',
       type: 'string',
-      description: 'Set the model platform (e.g. ollama, lm-studio)'
+      description: 'Set the platform (e.g. ollama, lm-studio)'
     })
     .option('base-url', {
       alias: 'u',
