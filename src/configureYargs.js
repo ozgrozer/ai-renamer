@@ -31,7 +31,12 @@ module.exports = async () => {
     .option('provider', {
       alias: 'p',
       type: 'string',
-      description: 'Set the provider (e.g. ollama, lm-studio)'
+      description: 'Set the provider (e.g. ollama, openai, lm-studio)'
+    })
+    .option('api-key', {
+      alias: 'a',
+      type: 'string',
+      description: 'Set the API key if you\'re using openai as provider'
     })
     .option('base-url', {
       alias: 'u',
@@ -41,7 +46,7 @@ module.exports = async () => {
     .option('model', {
       alias: 'm',
       type: 'string',
-      description: 'Set the model to use (e.g. gemma2, llama3)'
+      description: 'Set the model to use (e.g. gemma2, llama3, gpt-4o)'
     })
     .option('case', {
       alias: 'c',
@@ -71,6 +76,11 @@ module.exports = async () => {
 
   if (argv.provider) {
     config.defaultProvider = argv.provider
+    await saveConfig({ config })
+  }
+
+  if (argv['api-key']) {
+    config.defaultApiKey = argv['api-key']
     await saveConfig({ config })
   }
 

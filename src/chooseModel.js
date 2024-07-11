@@ -36,6 +36,12 @@ const listModels = async options => {
       return ollamaApis(options)
     } else if (provider === 'lm-studio') {
       return lmStudioApis(options)
+    } else if (provider === 'openai') {
+      return [
+        { name: 'gpt-4o' },
+        { name: 'gpt-4' },
+        { name: 'gpt-3.5-turbo' }
+      ]
     } else {
       throw new Error('🔴 No supported provider found')
     }

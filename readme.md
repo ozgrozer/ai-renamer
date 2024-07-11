@@ -51,6 +51,14 @@ You need to set the provider as `lm-studio` and it will auto-select the loaded m
 npx ai-renamer /path --provider=lm-studio
 ```
 
+## OpenAI Usage
+
+You need to set the provider as `openai` and the api-key with your API key and it will auto-select the gpt-4o model. But you can assign any model with `--model` flag.
+
+```bash
+npx ai-renamer /path --provider=openai --api-key=OPENAI_API_KEY
+```
+
 ## Custom Ports
 
 If you're using a different port in Ollama or LM Studio you could simply specify the base URLs.
@@ -69,12 +77,14 @@ npx ai-renamer --help
 Options:
   -h, --help                    Show help                              [boolean]
       --version                 Show version number                    [boolean]
-  -p, --provider                Set the provider (e.g. ollama, lm-studio)
-                                                                        [string]
+  -p, --provider                Set the provider (e.g. ollama, openai,
+                                lm-studio)                              [string]
+  -a, --api-key                 Set the API key if you're using openai as
+                                provider                                [string]
   -u, --base-url                Set the API base URL (e.g.
                                 http://127.0.0.1:11434 for ollama)      [string]
-  -m, --model                   Set the model to use (e.g. gemma2, llama3)
-                                                                        [string]
+  -m, --model                   Set the model to use (e.g. gemma2, llama3,
+                                gpt-4o)                                 [string]
   -c, --case                    Set the case style (e.g. camelCase, pascalCase,
                                 snakeCase, kebabCase)                   [string]
   -x, --chars                   Set the maximum number of characters in the new

@@ -6,8 +6,10 @@ const getNewName = require('./getNewName')
 const readFileContent = require('./readFileContent')
 const isProcessableFile = require('./isProcessableFile')
 
-module.exports = async ({ model, _case, chars, baseURL, language, provider, filePath, inputPath }) => {
+module.exports = async options => {
   try {
+    const { filePath, inputPath } = options
+
     const fileName = path.basename(filePath)
     const ext = path.extname(filePath).toLowerCase()
     const relativeFilePath = path.relative(inputPath, filePath)
@@ -31,17 +33,7 @@ module.exports = async ({ model, _case, chars, baseURL, language, provider, file
       }
     }
 
-    const newName = await getNewName({
-      model,
-      _case,
-      chars,
-      images,
-      content,
-      baseURL,
-      language,
-      provider,
-      relativeFilePath
-    })
+    const newName = await getNewName({ ...options, images, content, relativeFilePath })
     if (!newName) return
 
     const newFileName = await saveFile({ ext, newName, filePath })

@@ -4,16 +4,23 @@ const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 const processDirectory = require('./processDirectory')
 
-module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
+module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultApiKey, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
   try {
     const provider = defaultProvider || 'ollama'
     console.log(`⚪ Provider: ${provider}`)
+
+    const apiKey = defaultApiKey
+    if (apiKey) {
+      console.log('⚪ API key: **********')
+    }
 
     let baseURL = defaultBaseURL
     if (provider === 'ollama' && !baseURL) {
       baseURL = 'http://127.0.0.1:11434'
     } else if (provider === 'lm-studio' && !baseURL) {
       baseURL = 'http://127.0.0.1:1234'
+    } else if (provider === 'openai' && !baseURL) {
+      baseURL = 'https://api.openai.com'
     }
     console.log(`⚪ Base URL: ${baseURL}`)
 
@@ -39,6 +46,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
       model,
       _case,
       chars,
+      apiKey,
       baseURL,
       language,
       provider,
