@@ -1,4 +1,3 @@
-const fs = require('fs')
 const axios = require('axios')
 
 const ollamaApis = async ({ baseURL }) => {
