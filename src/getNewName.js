@@ -1,7 +1,7 @@
 const changeCase = require('./changeCase')
 const getModelResponse = require('./getModelResponse')
 
-module.exports = async ({ model, _case, chars, images, content, baseURL, language, platform, relativeFilePath }) => {
+module.exports = async ({ model, _case, chars, images, content, baseURL, language, provider, relativeFilePath }) => {
   try {
     const promptLines = [
       'Generate a concise, descriptive filename for the following content:',
@@ -21,7 +21,7 @@ module.exports = async ({ model, _case, chars, images, content, baseURL, languag
 
     const prompt = promptLines.join('\n')
 
-    const modelResult = await getModelResponse({ model, prompt, images, baseURL, platform })
+    const modelResult = await getModelResponse({ model, prompt, images, baseURL, provider })
 
     const maxChars = chars + 10
     const text = modelResult.trim().slice(-maxChars)

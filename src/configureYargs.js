@@ -28,10 +28,10 @@ module.exports = async () => {
       type: 'boolean',
       description: 'Show help'
     })
-    .option('platform', {
+    .option('provider', {
       alias: 'p',
       type: 'string',
-      description: 'Set the platform (e.g. ollama, lm-studio)'
+      description: 'Set the provider (e.g. ollama, lm-studio)'
     })
     .option('base-url', {
       alias: 'u',
@@ -69,8 +69,8 @@ module.exports = async () => {
     process.exit(0)
   }
 
-  if (argv.platform) {
-    config.defaultPlatform = argv.platform
+  if (argv.provider) {
+    config.defaultProvider = argv.provider
     await saveConfig({ config })
   }
 

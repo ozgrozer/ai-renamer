@@ -31,14 +31,14 @@ const lmStudioApis = async ({ baseURL }) => {
 
 const listModels = async options => {
   try {
-    const { platform } = options
+    const { provider } = options
 
-    if (platform === 'ollama') {
+    if (provider === 'ollama') {
       return ollamaApis(options)
-    } else if (platform === 'lm-studio') {
+    } else if (provider === 'lm-studio') {
       return lmStudioApis(options)
     } else {
-      throw new Error('🔴 No supported platform found')
+      throw new Error('🔴 No supported provider found')
     }
   } catch (err) {
     throw new Error(err.message)

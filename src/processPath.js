@@ -4,20 +4,20 @@ const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 const processDirectory = require('./processDirectory')
 
-module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultBaseURL, defaultLanguage, defaultPlatform, defaultIncludeSubdirectories }) => {
+module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
   try {
-    const platform = defaultPlatform || 'ollama'
-    console.log(`⚪ Platform: ${platform}`)
+    const provider = defaultProvider || 'ollama'
+    console.log(`⚪ Provider: ${provider}`)
 
     let baseURL = defaultBaseURL
-    if (platform === 'ollama' && !baseURL) {
+    if (provider === 'ollama' && !baseURL) {
       baseURL = 'http://127.0.0.1:11434'
-    } else if (platform === 'lm-studio' && !baseURL) {
+    } else if (provider === 'lm-studio' && !baseURL) {
       baseURL = 'http://127.0.0.1:1234'
     }
     console.log(`⚪ Base URL: ${baseURL}`)
 
-    const model = defaultModel || await chooseModel({ baseURL, platform })
+    const model = defaultModel || await chooseModel({ baseURL, provider })
     console.log(`⚪ Model: ${model}`)
 
     const _case = defaultCase || 'kebabCase'
@@ -41,7 +41,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
       chars,
       baseURL,
       language,
-      platform,
+      provider,
       inputPath,
       includeSubdirectories
     }

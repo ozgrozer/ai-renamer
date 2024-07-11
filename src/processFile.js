@@ -6,7 +6,7 @@ const getNewName = require('./getNewName')
 const readFileContent = require('./readFileContent')
 const isProcessableFile = require('./isProcessableFile')
 
-module.exports = async ({ model, _case, chars, baseURL, language, platform, filePath, inputPath }) => {
+module.exports = async ({ model, _case, chars, baseURL, language, provider, filePath, inputPath }) => {
   try {
     const fileName = path.basename(filePath)
     const ext = path.extname(filePath).toLowerCase()
@@ -39,7 +39,7 @@ module.exports = async ({ model, _case, chars, baseURL, language, platform, file
       content,
       baseURL,
       language,
-      platform,
+      provider,
       relativeFilePath
     })
     if (!newName) return
