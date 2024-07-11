@@ -17,7 +17,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     }
     console.log(`⚪ Base URL: ${baseURL}`)
 
-    const model = defaultModel || await chooseModel()
+    const model = defaultModel || await chooseModel({ baseURL, platform })
     console.log(`⚪ Model: ${model}`)
 
     const _case = defaultCase || 'kebabCase'
