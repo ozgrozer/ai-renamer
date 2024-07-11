@@ -77,7 +77,7 @@ module.exports = async options => {
     } else if (platform === 'lm-studio') {
       return lmStudioApis(options)
     } else {
-      throw new Error('🔴 No supported platform selected')
+      throw new Error('🔴 No supported platform found')
     }
   } catch (err) {
     throw new Error(err.message)
