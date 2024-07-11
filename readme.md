@@ -35,7 +35,7 @@ npm install -g ai-renamer
 ai-renamer /path
 ```
 
-Ollama Usage
+## Ollama Usage
 
 Ollama is the default provider so you don't have to do anything. You can just run `npx ai-renamer /images`. At the first launch it will try to auto-select the Llava model but if it couldn't do that you can specify the model.
 
@@ -43,13 +43,15 @@ Ollama is the default provider so you don't have to do anything. You can just ru
 npx ai-renamer /path --provider=ollama --model=llava:13b
 ```
 
-LM Studio Usage
+## LM Studio Usage
 
 You need to set the provider as `lm-studio` and it will auto-select the loaded model in LM Studio.
 
 ```bash
 npx ai-renamer /path --provider=lm-studio
 ```
+
+## Custom Ports
 
 If you're using a different port in Ollama or LM Studio you could simply specify the base URLs.
 
@@ -58,9 +60,9 @@ npx ai-renamer /path --provider=ollama --base-url=http://127.0.0.1:11434
 npx ai-renamer /path --provider=lm-studio --base-url=http://127.0.0.1:1234
 ```
 
-The values of the flags will be saved to your disk when you use them. You can find the config file at `~/ai-renamer.json`. If you're using a Mac it's `/Users/your-user-name/ai-renamer.json`. Also when you set a flag you don't have to use them again. The script gets the values from this config file.
-
 ## Params
+
+The values of the flags will be saved to your disk when you use them. You can find the config file at `~/ai-renamer.json`. If you're using a Mac it's `/Users/your-user-name/ai-renamer.json`. Also when you set a flag you don't have to use them again. The script gets the values from this config file.
 
 ```bash
 npx ai-renamer --help
