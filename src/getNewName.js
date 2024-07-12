@@ -6,15 +6,18 @@ module.exports = async options => {
 
   try {
     const promptLines = [
-      'Generate a concise, descriptive filename for the following content:',
-      `- Use ${_case} format`,
-      `- Maximum ${chars} characters`,
-      `- Use ${language} language in the filename`,
-      '- Exclude file extension',
-      '- Avoid special characters',
-      '- Output only the filename',
+      'Generate filename:',
       '',
-      `IMPORTANT: Your entire response should be just the filename in ${_case} format, in ${language} language, and max ${chars} characters. Do not include any other text.`
+      `Use ${_case}`,
+      `Max ${chars} characters`,
+      `${language} only`,
+      'No file extension',
+      'No special chars',
+      'Only key elements',
+      'One word if possible',
+      'Noun-verb format',
+      '',
+      'Respond ONLY with filename.'
     ]
 
     if (content) {
