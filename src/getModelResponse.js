@@ -12,8 +12,10 @@ const ollamaApis = async ({ model, prompt, images, baseURL }) => {
     }
 
     if (images && images.length > 0) {
-      const imageData = await fs.readFileSync(images[0])
-      data.images = [imageData.toString('base64')]
+      data.images = await Promise.all(images.map(async imagePath => {
+        const imageData = await fs.promises.readFile(imagePath)
+        return imageData.toString('base64')
+      }))
     }
 
     const apiResult = await axios({
@@ -46,11 +48,13 @@ const openaiApis = async ({ model, prompt, images, apiKey, baseURL }) => {
     }]
 
     if (images && images.length > 0) {
-      const imageData = await fs.readFileSync(images[0])
-      messages[0].content.push({
-        type: 'image_url',
-        image_url: { url: `data:image/jpeg;base64,${imageData.toString('base64')}` }
-      })
+      for (const imagePath of images) {
+        const imageData = await fs.promises.readFile(imagePath)
+        messages[0].content.push({
+          type: 'image_url',
+          image_url: { url: `data:image/jpeg;base64,${imageData.toString('base64')}` }
+        })
+      }
     }
 
     data.messages = messages
