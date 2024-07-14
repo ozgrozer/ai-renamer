@@ -14,14 +14,14 @@ const getVideoDuration = ({ inputFile }) => {
   })
 }
 
-module.exports = async ({ inputFile }) => {
+module.exports = async ({ frames, inputFile }) => {
   const outputDir = './frames'
 
   try {
     await fs.mkdir(outputDir, { recursive: true })
 
     const duration = await getVideoDuration({ inputFile })
-    const numFrames = Math.min(10, Math.floor(duration))
+    const numFrames = Math.min(frames, Math.floor(duration))
     const frameRate = numFrames / duration
     const frameInterval = duration / numFrames
 
