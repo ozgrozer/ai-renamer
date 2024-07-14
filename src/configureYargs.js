@@ -48,6 +48,11 @@ module.exports = async () => {
       type: 'string',
       description: 'Set the model to use (e.g. gemma2, llama3, gpt-4o)'
     })
+    .option('frames', {
+      alias: 'f',
+      type: 'number',
+      description: 'Set the maximum number of frames to extract from videos (e.g. 3, 5, 10)'
+    })
     .option('case', {
       alias: 'c',
       type: 'string',
@@ -91,6 +96,11 @@ module.exports = async () => {
 
   if (argv.model) {
     config.defaultModel = argv.model
+    await saveConfig({ config })
+  }
+
+  if (argv.frames) {
+    config.defaultFrames = argv.frames
     await saveConfig({ config })
   }
 

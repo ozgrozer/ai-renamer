@@ -4,7 +4,7 @@ const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 const processDirectory = require('./processDirectory')
 
-module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultApiKey, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
+module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultFrames, defaultApiKey, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
   try {
     const provider = defaultProvider || 'ollama'
     console.log(`⚪ Provider: ${provider}`)
@@ -27,6 +27,9 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     const model = defaultModel || await chooseModel({ baseURL, provider })
     console.log(`⚪ Model: ${model}`)
 
+    const frames = defaultFrames || 3
+    console.log(`⚪ Frames: ${frames}`)
+
     const _case = defaultCase || 'kebabCase'
     console.log(`⚪ Case: ${_case}`)
 
@@ -46,6 +49,7 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
       model,
       _case,
       chars,
+      frames,
       apiKey,
       baseURL,
       language,

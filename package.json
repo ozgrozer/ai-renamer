@@ -1,5 +1,5 @@
 {
-  "version": "1.0.22",
+  "version": "1.0.23",
   "license": "GPL-3.0",
   "name": "ai-renamer",
   "main": "./src/index.js",
@@ -20,6 +20,7 @@
     "axios": "^1.7.2",
     "change-case": "^5.4.4",
     "pdf-parse": "^1.1.1",
+    "uuid": "^10.0.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
@@ -29,8 +30,10 @@
     "ai",
     "files",
     "ollama",
+    "openai",
     "llama3",
     "cli-tool",
+    "lm-studio",
     "automation",
     "file-renamer",
     "file-management",
