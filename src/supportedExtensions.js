@@ -29,6 +29,9 @@ module.exports = [
   // image files
   '.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff',
 
+  // video files
+  '.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv', '.webm',
+
   // handled separately in code
   '.pdf'
 ]
