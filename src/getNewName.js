@@ -2,7 +2,7 @@ const changeCase = require('./changeCase')
 const getModelResponse = require('./getModelResponse')
 
 module.exports = async options => {
-  const { _case, chars, content, language, relativeFilePath } = options
+  const { _case, chars, content, language, videoPrompt, relativeFilePath } = options
 
   try {
     const promptLines = [
@@ -19,6 +19,10 @@ module.exports = async options => {
       '',
       'Respond ONLY with filename.'
     ]
+
+    if (videoPrompt) {
+      promptLines.unshift(videoPrompt, '')
+    }
 
     if (content) {
       promptLines.push('', 'Content:', content)
