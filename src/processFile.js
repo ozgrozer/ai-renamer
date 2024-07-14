@@ -1,8 +1,10 @@
 const path = require('path')
 
 const isImage = require('./isImage')
+const isVideo = require('./isVideo')
 const saveFile = require('./saveFile')
 const getNewName = require('./getNewName')
+const extractFrames = require('./extractFrames')
 const readFileContent = require('./readFileContent')
 const isProcessableFile = require('./isProcessableFile')
 
@@ -22,9 +24,13 @@ module.exports = async options => {
     }
 
     let content
-    const images = []
+    let videoPrompt
+    let images = []
     if (isImage({ ext })) {
       images.push(filePath)
+    } else if (isVideo({ ext })) {
+      const { imagePaths, videoPrompt } = await extractFrames({ inputFile: filePath })
+      images = imagePaths
     } else {
       content = await readFileContent({ filePath })
       if (!content) {
@@ -33,7 +39,7 @@ module.exports = async options => {
       }
     }
 
-    const newName = await getNewName({ ...options, images, content, relativeFilePath })
+    const newName = await getNewName({ ...options, images, content, videoPrompt, relativeFilePath })
     if (!newName) return
 
     const newFileName = await saveFile({ ext, newName, filePath })
