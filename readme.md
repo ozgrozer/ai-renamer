@@ -17,7 +17,7 @@ https://github.com/ozgrozer/ai-renamer/assets/651938/7ac84a2d-8e05-4756-8827-3bd
 
 ## Usage
 
-You need to have [Ollama](https://ollama.com/download) or [LM Studio](https://lmstudio.ai/) and at least one LLM (Llava, Gemma, Llama etc.) installed on your system
+You need to have [Ollama](https://ollama.com/download) or [LM Studio](https://lmstudio.ai/) and at least one LLM (Llava, Gemma, Llama etc.) installed on your system. You need to have [ffmpeg][https://www.ffmpeg.org/download.html] to rename videos.
 
 Run with NPX
 
@@ -85,6 +85,8 @@ Options:
                                 http://127.0.0.1:11434 for ollama)      [string]
   -m, --model                   Set the model to use (e.g. gemma2, llama3,
                                 gpt-4o)                                 [string]
+  -f, --max-frames              Set the maximum number of frames to extract from
+                                videos (e.g. 3, 5, 10)                  [number]
   -c, --case                    Set the case style (e.g. camelCase, pascalCase,
                                 snakeCase, kebabCase)                   [string]
   -x, --chars                   Set the maximum number of characters in the new
