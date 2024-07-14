@@ -1,4 +1,6 @@
+const fs = require('fs')
 const path = require('path')
+const { v4: uuidv4 } = require('uuid')
 
 const isImage = require('./isImage')
 const isVideo = require('./isVideo')
@@ -6,6 +8,7 @@ const saveFile = require('./saveFile')
 const getNewName = require('./getNewName')
 const extractFrames = require('./extractFrames')
 const readFileContent = require('./readFileContent')
+const deleteDirectory = require('./deleteDirectory')
 const isProcessableFile = require('./isProcessableFile')
 
 module.exports = async options => {
@@ -26,11 +29,14 @@ module.exports = async options => {
     let content
     let videoPrompt
     let images = []
+    let framesOutputDir
     if (isImage({ ext })) {
       images.push(filePath)
     } else if (isVideo({ ext })) {
+      framesOutputDir = `/tmp/ai-renamer/${uuidv4()}`
       const _extractedFrames = await extractFrames({
         frames,
+        framesOutputDir,
         inputFile: filePath
       })
       images = _extractedFrames.images
@@ -49,6 +55,11 @@ module.exports = async options => {
     const newFileName = await saveFile({ ext, newName, filePath })
     const relativeNewFilePath = path.join(path.dirname(relativeFilePath), newFileName)
     console.log(`🟢 Renamed: ${relativeFilePath} to ${relativeNewFilePath}`)
+
+    if (isVideo({ ext }) && framesOutputDir) {
+      console.log({ framesOutputDir })
+      await deleteDirectory({ folderPath: framesOutputDir })
+    }
   } catch (err) {
     console.log(err.message)
   }
