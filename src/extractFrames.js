@@ -14,18 +14,16 @@ const getVideoDuration = ({ inputFile }) => {
   })
 }
 
-module.exports = async ({ frames, inputFile }) => {
-  const outputDir = './frames'
-
+module.exports = async ({ frames, inputFile, framesOutputDir }) => {
   try {
-    await fs.mkdir(outputDir, { recursive: true })
+    await fs.mkdir(framesOutputDir, { recursive: true })
 
     const duration = await getVideoDuration({ inputFile })
     const numFrames = Math.min(frames, Math.floor(duration))
     const frameRate = numFrames / duration
     const frameInterval = duration / numFrames
 
-    const command = `ffmpeg -i "${inputFile}" -vf fps=${frameRate} -frames:v ${numFrames} -q:v 2 "${outputDir}/frame_%03d.jpg" -loglevel error`
+    const command = `ffmpeg -i "${inputFile}" -vf fps=${frameRate} -frames:v ${numFrames} -q:v 2 "${framesOutputDir}/frame_%03d.jpg" -loglevel error`
 
     await new Promise((resolve, reject) => {
       exec(command, (error) => {
@@ -38,7 +36,7 @@ module.exports = async ({ frames, inputFile }) => {
     })
 
     const images = Array.from({ length: numFrames }, (_, i) =>
-      path.resolve(outputDir, `frame_${String(i + 1).padStart(3, '0')}.jpg`)
+      path.resolve(framesOutputDir, `frame_${String(i + 1).padStart(3, '0')}.jpg`)
     )
 
     const videoPrompt = `Analyze these ${numFrames} frames from a ${duration.toFixed(1)}-second video. One frame every ${frameInterval.toFixed(1)} seconds.`
