@@ -85,7 +85,7 @@ Options:
                                 http://127.0.0.1:11434 for ollama)      [string]
   -m, --model                   Set the model to use (e.g. gemma2, llama3,
                                 gpt-4o)                                 [string]
-  -f, --max-frames              Set the maximum number of frames to extract from
+  -f, --frames                  Set the maximum number of frames to extract from
                                 videos (e.g. 3, 5, 10)                  [number]
   -c, --case                    Set the case style (e.g. camelCase, pascalCase,
                                 snakeCase, kebabCase)                   [string]
