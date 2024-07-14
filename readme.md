@@ -7,13 +7,17 @@ A Node.js CLI that uses Ollama and LM Studio models (Llava, Gemma, Llama etc.) t
 
 ## Preview
 
+Rename videos
+
+https://github.com/user-attachments/assets/502aedba-044e-4ed5-a1c7-bca84af2f3ce
+
 Rename images
 
 https://github.com/ozgrozer/ai-renamer/assets/651938/0d229179-8385-4f17-a9fb-44d40c79d1e9
 
 Rename files
 
-https://github.com/ozgrozer/ai-renamer/assets/651938/7ac84a2d-8e05-4756-8827-3bd746b3edae
+https://github.com/user-attachments/assets/f8b37c3a-9cc0-48fc-aaea-f25f7b6ee4cc
 
 ## Usage
 
