@@ -57,7 +57,6 @@ module.exports = async options => {
     console.log(`🟢 Renamed: ${relativeFilePath} to ${relativeNewFilePath}`)
 
     if (isVideo({ ext }) && framesOutputDir) {
-      console.log({ framesOutputDir })
       await deleteDirectory({ folderPath: framesOutputDir })
     }
   } catch (err) {
