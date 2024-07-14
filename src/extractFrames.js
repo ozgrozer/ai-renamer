@@ -20,7 +20,7 @@ module.exports = async ({ inputFile }) => {
   try {
     await fs.mkdir(outputDir, { recursive: true })
 
-    const duration = await getVideoDuration(inputFile)
+    const duration = await getVideoDuration({ inputFile })
     const numFrames = Math.min(10, Math.floor(duration))
     const frameRate = numFrames / duration
     const frameInterval = duration / numFrames
@@ -37,14 +37,14 @@ module.exports = async ({ inputFile }) => {
       })
     })
 
-    const imagePaths = Array.from({ length: numFrames }, (_, i) =>
+    const images = Array.from({ length: numFrames }, (_, i) =>
       path.resolve(outputDir, `frame_${String(i + 1).padStart(3, '0')}.jpg`)
     )
 
     const videoPrompt = `Analyze these ${numFrames} frames from a ${duration.toFixed(1)}-second video. One frame every ${frameInterval.toFixed(1)} seconds.`
 
     return {
-      imagePaths,
+      images,
       videoPrompt
     }
   } catch (err) {

@@ -29,8 +29,9 @@ module.exports = async options => {
     if (isImage({ ext })) {
       images.push(filePath)
     } else if (isVideo({ ext })) {
-      const { imagePaths, videoPrompt } = await extractFrames({ inputFile: filePath })
-      images = imagePaths
+      const _extractedFrames = await extractFrames({ inputFile: filePath })
+      images = _extractedFrames.images
+      videoPrompt = _extractedFrames.videoPrompt
     } else {
       content = await readFileContent({ filePath })
       if (!content) {
