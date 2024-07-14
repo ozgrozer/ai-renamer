@@ -36,6 +36,8 @@
     "lm-studio",
     "automation",
     "file-renamer",
+    "image-renamer",
+    "video-renamer",
     "file-management",
     "machine-learning"
   ]
