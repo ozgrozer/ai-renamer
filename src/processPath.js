@@ -14,8 +14,8 @@ module.exports = async ({
   defaultBaseURL,
   defaultLanguage,
   defaultProvider,
-  defaultIncludeSubdirectories,
-  defaultCustomPrompt
+  defaultCustomPrompt,
+  defaultIncludeSubdirectories
 }) => {
   try {
     const provider = defaultProvider || 'ollama'
