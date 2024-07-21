@@ -99,6 +99,8 @@ Options:
                                                                         [string]
   -s, --include-subdirectories  Include files in subdirectories when processing
                                 (e.g: true, false)                      [string]
+  -r, --custom-prompt           Add a custom prompt to the LLM (e.g. "Only
+                                describe the background")               [string]
 ```
 
 `ai-renamer` uses `change-case` library for case styling

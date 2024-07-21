@@ -4,7 +4,19 @@ const processFile = require('./processFile')
 const chooseModel = require('./chooseModel')
 const processDirectory = require('./processDirectory')
 
-module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, defaultFrames, defaultApiKey, defaultBaseURL, defaultLanguage, defaultProvider, defaultIncludeSubdirectories }) => {
+module.exports = async ({
+  inputPath,
+  defaultCase,
+  defaultModel,
+  defaultChars,
+  defaultFrames,
+  defaultApiKey,
+  defaultBaseURL,
+  defaultLanguage,
+  defaultProvider,
+  defaultIncludeSubdirectories,
+  defaultCustomPrompt
+}) => {
   try {
     const provider = defaultProvider || 'ollama'
     console.log(`⚪ Provider: ${provider}`)
@@ -42,6 +54,9 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
     const includeSubdirectories = defaultIncludeSubdirectories === 'true' || false
     console.log(`⚪ Include subdirectories: ${includeSubdirectories}`)
 
+    const customPrompt = defaultCustomPrompt || null
+    console.log(`⚪ Custom Prompt: ${customPrompt}`)
+
     console.log('--------------------------------------------------')
 
     const stats = await fs.stat(inputPath)
@@ -55,7 +70,8 @@ module.exports = async ({ inputPath, defaultCase, defaultModel, defaultChars, de
       language,
       provider,
       inputPath,
-      includeSubdirectories
+      includeSubdirectories,
+      customPrompt
     }
 
     if (stats.isDirectory()) {

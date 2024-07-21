@@ -2,7 +2,7 @@ const changeCase = require('./changeCase')
 const getModelResponse = require('./getModelResponse')
 
 module.exports = async options => {
-  const { _case, chars, content, language, videoPrompt, relativeFilePath } = options
+  const { _case, chars, content, language, videoPrompt, relativeFilePath, customPrompt } = options
 
   try {
     const promptLines = [
@@ -26,6 +26,10 @@ module.exports = async options => {
 
     if (content) {
       promptLines.push('', 'Content:', content)
+    }
+
+    if (customPrompt) {
+      promptLines.push('', 'Custom instructions:', customPrompt)
     }
 
     const prompt = promptLines.join('\n')

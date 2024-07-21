@@ -72,6 +72,11 @@ module.exports = async () => {
       alias: 's',
       type: 'string',
       description: 'Include files in subdirectories when processing (e.g: true, false)'
+    })
+    .option('custom-prompt', {
+      alias: 'r',
+      type: 'string',
+      description: 'Add a custom prompt to the LLM (e.g. "Only describe the background")'
     }).argv
 
   if (argv.help) {
@@ -121,6 +126,11 @@ module.exports = async () => {
 
   if (argv['include-subdirectories']) {
     config.defaultIncludeSubdirectories = argv['include-subdirectories']
+    await saveConfig({ config })
+  }
+
+  if (argv['custom-prompt']) {
+    config.defaultCustomPrompt = argv['custom-prompt']
     await saveConfig({ config })
   }
 
