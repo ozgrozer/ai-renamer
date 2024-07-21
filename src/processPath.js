@@ -55,7 +55,9 @@ module.exports = async ({
     console.log(`⚪ Include subdirectories: ${includeSubdirectories}`)
 
     const customPrompt = defaultCustomPrompt || null
-    console.log(`⚪ Custom Prompt: ${customPrompt}`)
+    if (customPrompt) {
+      console.log(`⚪ Custom Prompt: ${customPrompt}`)
+    }
 
     console.log('--------------------------------------------------')
 
