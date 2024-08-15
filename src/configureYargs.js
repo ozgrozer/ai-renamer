@@ -15,7 +15,7 @@ const loadConfig = async () => {
   }
 }
 
-const saveConfig = async (config) => {
+const saveConfig = async ({ config }) => {
   await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 2))
 }
 
@@ -90,10 +90,8 @@ module.exports = async () => {
   }
 
   const updateConfig = async (key, value) => {
-    if (key !== 'regex') { 
-      config[key] = value
-      await saveConfig(config)
-    }
+    config[key] = value
+    await saveConfig({ config })
   }
 
   if (argv.provider) await updateConfig('defaultProvider', argv.provider)
@@ -107,6 +105,10 @@ module.exports = async () => {
   if (argv['include-subdirectories']) await updateConfig('defaultIncludeSubdirectories', argv['include-subdirectories'])
   if (argv['custom-prompt']) await updateConfig('defaultCustomPrompt', argv['custom-prompt'])
 
-  const { regex, ...returnedConfig } = argv
-  return { argv: returnedConfig, config }
+  const returnedConfig = {
+    ...config,
+    regex: argv.regex
+  }
+
+  return { argv, config: returnedConfig }
 }
