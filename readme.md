@@ -1,6 +1,6 @@
-# ai-renamer
+# AI Renamer
 
-A Node.js CLI that uses Ollama and LM Studio models (Llava, Gemma, Llama etc.) to intelligently rename files by their contents
+A Node.js CLI tool that uses Ollama and LM Studio models (Llava, Gemma, Llama, etc.) to intelligently rename files based on their contents.
 
 [![npm](https://img.shields.io/npm/v/ai-renamer.svg?style=flat-square)](https://www.npmjs.com/package/ai-renamer)
 [![license](https://img.shields.io/npm/l/ai-renamer?style=flat-square)](https://github.com/ozgrozer/ai-renamer/blob/main/license)
@@ -21,15 +21,15 @@ https://github.com/user-attachments/assets/f8b37c3a-9cc0-48fc-aaea-f25f7b6ee4cc
 
 ## Usage
 
-You need to have [Ollama](https://ollama.com/download) or [LM Studio](https://lmstudio.ai/) and at least one LLM (Llava, Gemma, Llama etc.) installed on your system. You need to have [ffmpeg](https://www.ffmpeg.org/download.html) to rename videos.
+You need to have [Ollama](https://ollama.com/download) or [LM Studio](https://lmstudio.ai/) and at least one LLM (Llava, Gemma, Llama, etc.) installed on your system. Additionally, [FFmpeg](https://www.ffmpeg.org/download.html) is required for renaming videos.
 
-Run with NPX
+Run with NPX:
 
 ```bash
 npx ai-renamer /path
 ```
 
-Run with NPM
+Run with NPM:
 
 ```bash
 # Install it globally
@@ -41,7 +41,7 @@ ai-renamer /path
 
 ## Ollama Usage
 
-Ollama is the default provider so you don't have to do anything. You can just run `npx ai-renamer /images`. At the first launch it will try to auto-select the Llava model but if it couldn't do that you can specify the model.
+Ollama is the default provider, so you don't need to specify it explicitly. Simply run `npx ai-renamer /images`. On first launch, it will try to auto-select the Llava model. If it cannot do so, you can specify the model manually:
 
 ```bash
 npx ai-renamer /path --provider=ollama --model=llava:13b
@@ -49,7 +49,7 @@ npx ai-renamer /path --provider=ollama --model=llava:13b
 
 ## LM Studio Usage
 
-You need to set the provider as `lm-studio` and it will auto-select the loaded model in LM Studio.
+To use LM Studio, set the provider as `lm-studio`. It will automatically select the loaded model in LM Studio:
 
 ```bash
 npx ai-renamer /path --provider=lm-studio
@@ -57,7 +57,7 @@ npx ai-renamer /path --provider=lm-studio
 
 ## OpenAI Usage
 
-You need to set the provider as `openai` and the api-key with your API key and it will auto-select the gpt-4o model. But you can assign any model with `--model` flag.
+For OpenAI, set the provider to `openai` and provide your API key. The tool will auto-select the `gpt-4o` model by default, but you can specify any model using the `--model` flag:
 
 ```bash
 npx ai-renamer /path --provider=openai --api-key=OPENAI_API_KEY
@@ -65,16 +65,18 @@ npx ai-renamer /path --provider=openai --api-key=OPENAI_API_KEY
 
 ## Custom Ports
 
-If you're using a different port in Ollama or LM Studio you could simply specify the base URLs.
+If you're using a non-default port in Ollama or LM Studio, you can specify the base URLs:
 
 ```bash
 npx ai-renamer /path --provider=ollama --base-url=http://127.0.0.1:11434
 npx ai-renamer /path --provider=lm-studio --base-url=http://127.0.0.1:1234
 ```
 
-## Params
+## Parameters
 
-The values of the flags will be saved to your disk when you use them. You can find the config file at `~/ai-renamer.json`. If you're using a Mac it's `/Users/your-user-name/ai-renamer.json`. Also when you set a flag you don't have to use them again. The script gets the values from this config file.
+The values of the flags will be saved to your disk when you use them. You can find the config file at `~/ai-renamer.json`. If you're using a Mac, it will be located at `/Users/your-user-name/ai-renamer.json`. Once a flag is set, you don't need to specify it again—the script will retrieve the values from this config file.
+
+### Available Options
 
 ```bash
 npx ai-renamer --help
@@ -83,10 +85,10 @@ Options:
       --version                 Show version number                    [boolean]
   -p, --provider                Set the provider (e.g. ollama, openai,
                                 lm-studio)                              [string]
-  -a, --api-key                 Set the API key if you're using openai as
+  -a, --api-key                 Set the API key if you're using OpenAI as
                                 provider                                [string]
   -u, --base-url                Set the API base URL (e.g.
-                                http://127.0.0.1:11434 for ollama)      [string]
+                                http://127.0.0.1:11434 for Ollama)      [string]
   -m, --model                   Set the model to use (e.g. gemma2, llama3,
                                 gpt-4o)                                 [string]
   -f, --frames                  Set the maximum number of frames to extract from
@@ -98,12 +100,16 @@ Options:
   -l, --language                Set the output language (e.g. English, Turkish)
                                                                         [string]
   -s, --include-subdirectories  Include files in subdirectories when processing
-                                (e.g: true, false)                      [string]
-  -r, --custom-prompt           Add a custom prompt to the LLM (e.g. "Only
+                                (e.g., true, false)                     [string]
+  -r, --custom-prompt           Add a custom prompt to the LLM (e.g., "Only
                                 describe the background")               [string]
+  -g, --file-regex              Process only files matching the regex pattern
+                                (e.g., ".*\\.jpg$")                     [string]
 ```
 
-`ai-renamer` uses `change-case` library for case styling
+### Case Styling
+
+`ai-renamer` uses the `change-case` library for case styling:
 
 ```bash
 # value: result
@@ -123,7 +129,7 @@ trainCase: Two-Words
 
 ## Contribution
 
-Feel free to contribute. Open a new [issue](https://github.com/ozgrozer/ai-renamer/issues), or make a [pull request](https://github.com/ozgrozer/ai-renamer/pulls).
+Feel free to contribute. Open a new [issue](https://github.com/ozgrozer/ai-renamer/issues) or make a [pull request](https://github.com/ozgrozer/ai-renamer/pulls).
 
 ## License
 
