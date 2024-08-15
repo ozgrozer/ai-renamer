@@ -89,60 +89,26 @@ module.exports = async () => {
     process.exit(0)
   }
 
-  if (argv.provider) {
-    config.defaultProvider = argv.provider
+  const updateConfig = async (key, value) => {
+    config[key] = value
     await saveConfig({ config })
   }
 
-  if (argv['api-key']) {
-    config.defaultApiKey = argv['api-key']
-    await saveConfig({ config })
+  if (argv.provider) await updateConfig('defaultProvider', argv.provider)
+  if (argv['api-key']) await updateConfig('defaultApiKey', argv['api-key'])
+  if (argv['base-url']) await updateConfig('defaultBaseURL', argv['base-url'])
+  if (argv.model) await updateConfig('defaultModel', argv.model)
+  if (argv.frames) await updateConfig('defaultFrames', argv.frames)
+  if (argv.case) await updateConfig('defaultCase', argv.case)
+  if (argv.chars) await updateConfig('defaultChars', argv.chars)
+  if (argv.language) await updateConfig('defaultLanguage', argv.language)
+  if (argv['include-subdirectories']) await updateConfig('defaultIncludeSubdirectories', argv['include-subdirectories'])
+  if (argv['custom-prompt']) await updateConfig('defaultCustomPrompt', argv['custom-prompt'])
+
+  const returnedConfig = {
+    ...config,
+    regex: argv.regex
   }
 
-  if (argv['base-url']) {
-    config.defaultBaseURL = argv['base-url']
-    await saveConfig({ config })
-  }
-
-  if (argv.model) {
-    config.defaultModel = argv.model
-    await saveConfig({ config })
-  }
-
-  if (argv.frames) {
-    config.defaultFrames = argv.frames
-    await saveConfig({ config })
-  }
-
-  if (argv.case) {
-    config.defaultCase = argv.case
-    await saveConfig({ config })
-  }
-
-  if (argv.chars) {
-    config.defaultChars = argv.chars
-    await saveConfig({ config })
-  }
-
-  if (argv.language) {
-    config.defaultLanguage = argv.language
-    await saveConfig({ config })
-  }
-
-  if (argv['include-subdirectories']) {
-    config.defaultIncludeSubdirectories = argv['include-subdirectories']
-    await saveConfig({ config })
-  }
-
-  if (argv['custom-prompt']) {
-    config.defaultCustomPrompt = argv['custom-prompt']
-    await saveConfig({ config })
-  }
-
-  if (argv.regex) {
-    config.defaultRegex = argv.regex
-    await saveConfig({ config })
-  }
-
-  return { argv, config }
+  return { argv, config: returnedConfig }
 }
