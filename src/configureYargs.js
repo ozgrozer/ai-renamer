@@ -77,6 +77,11 @@ module.exports = async () => {
       alias: 'r',
       type: 'string',
       description: 'Add a custom prompt to the LLM (e.g. "Only describe the background")'
+    })
+    .option('regex', {
+      alias: 'g',
+      type: 'string',
+      description: 'Set a regex pattern to filter files (e.g. "\.jpg$" for jpg files only)'
     }).argv
 
   if (argv.help) {
@@ -131,6 +136,11 @@ module.exports = async () => {
 
   if (argv['custom-prompt']) {
     config.defaultCustomPrompt = argv['custom-prompt']
+    await saveConfig({ config })
+  }
+
+  if (argv.regex) {
+    config.defaultRegex = argv.regex
     await saveConfig({ config })
   }
 

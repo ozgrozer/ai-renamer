@@ -15,7 +15,8 @@ module.exports = async ({
   defaultLanguage,
   defaultProvider,
   defaultCustomPrompt,
-  defaultIncludeSubdirectories
+  defaultIncludeSubdirectories,
+  regex
 }) => {
   try {
     const provider = defaultProvider || 'ollama'
@@ -59,6 +60,11 @@ module.exports = async ({
       console.log(`⚪ Custom Prompt: ${customPrompt}`)
     }
 
+    const regexFilter = regex ? new RegExp(regex) : null
+    if (regexFilter) {
+      console.log(`⚪ Regex filter: ${regexFilter.source}`)
+    }
+
     console.log('--------------------------------------------------')
 
     const stats = await fs.stat(inputPath)
@@ -73,13 +79,18 @@ module.exports = async ({
       provider,
       inputPath,
       includeSubdirectories,
-      customPrompt
+      customPrompt,
+      regex: regexFilter
     }
 
     if (stats.isDirectory()) {
       await processDirectory({ options, inputPath })
     } else if (stats.isFile()) {
-      await processFile({ ...options, filePath: inputPath })
+      if (!regexFilter || regexFilter.test(inputPath)) {
+        await processFile({ ...options, filePath: inputPath })
+      } else {
+        console.log(`Skipping file ${inputPath} (doesn't match regex)`)
+      }
     }
   } catch (err) {
     console.log(err.message)

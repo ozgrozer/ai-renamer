@@ -13,7 +13,11 @@ const main = async () => {
       process.exit(1)
     }
 
-    await processPath({ ...config, inputPath })
+    await processPath({ 
+      ...config, 
+      inputPath,
+      regex: argv.regex
+    })
   } catch (err) {
     console.log(err.message)
   }
