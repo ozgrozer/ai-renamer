@@ -27,7 +27,7 @@ module.exports = [
   '.txt', '.log', '.diff', '.patch', '.proto', '.tex',
 
   // image files
-  '.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff',
+  '.jpg', '.jpeg', '.png', '.bmp', '.tif', '.tiff', '.webp',
 
   // video files
   '.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv', '.webm',
