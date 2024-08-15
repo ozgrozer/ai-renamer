@@ -12,13 +12,18 @@ const isProcessableFile = require('./isProcessableFile')
 
 module.exports = async options => {
   try {
-    const { frames, filePath, inputPath } = options
+    const { frames, filePath, inputPath, regex } = options
 
     const fileName = path.basename(filePath)
     const ext = path.extname(filePath).toLowerCase()
     const relativeFilePath = path.relative(inputPath, filePath)
 
     if (fileName === '.DS_Store') return
+
+    if (regex && !regex.test(filePath)) {
+      console.log(`🟡 Skipping file (doesn't match regex): ${relativeFilePath}`)
+      return
+    }
 
     if (!isProcessableFile({ filePath })) {
       console.log(`🟡 Unsupported file: ${relativeFilePath}`)
