@@ -1,63 +1,80 @@
-const fs = require('fs')
-const axios = require('axios')
+const fs = require('fs');
+const axios = require('axios');
+const sharp = require('sharp');
+
+const MAX_WIDTH = 1344;
+const MAX_HEIGHT = 1344;
+
+const compressImageIfNeeded = async (imagePath) => {
+  const image = sharp(imagePath);
+  const { width, height } = await image.metadata();
+
+  if (width <= MAX_WIDTH && height <= MAX_HEIGHT) {
+    return image.toBuffer();
+  }
+
+  return image
+    .resize(MAX_WIDTH, MAX_HEIGHT, { fit: 'inside' })
+    .toBuffer();
+};
 
 const ollamaApis = async ({ model, prompt, images, baseURL }) => {
   try {
-    const url = `${baseURL}/api/generate`
+    const url = `${baseURL}/api/generate`;
 
     const data = {
       model,
       prompt,
-      stream: false
-    }
+      stream: false,
+    };
 
     if (images && images.length > 0) {
-      data.images = await Promise.all(images.map(async imagePath => {
-        const imageData = await fs.promises.readFile(imagePath)
-        return imageData.toString('base64')
-      }))
+      data.images = await Promise.all(images.map(async (imagePath) => {
+        const compressedImage = await compressImageIfNeeded(imagePath);
+        return compressedImage.toString('base64');
+      }));
     }
 
     const apiResult = await axios({
       url,
       data,
       method: 'post',
-      headers: { 'Content-Type': 'application/json' }
-    })
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-    return apiResult.data.response
+    return apiResult.data.response;
   } catch (err) {
-    throw new Error(err?.response?.data?.error?.message || err?.response?.data?.error || err.message)
+    throw new Error(err?.response?.data?.error?.message || err?.response?.data?.error || err.message);
   }
-}
+};
 
 const openaiApis = async ({ model, prompt, images, apiKey, baseURL }) => {
   try {
-    const url = `${baseURL}/v1/chat/completions`
+    const url = `${baseURL}/v1/chat/completions`;
 
     const data = {
       model,
-      stream: false
-    }
+      stream: false,
+    };
 
     const messages = [{
       role: 'user',
       content: [
-        { type: 'text', text: prompt }
-      ]
-    }]
+        { type: 'text', text: prompt },
+      ],
+    }];
 
     if (images && images.length > 0) {
       for (const imagePath of images) {
-        const imageData = await fs.promises.readFile(imagePath)
+        const imageData = await fs.promises.readFile(imagePath);
         messages[0].content.push({
           type: 'image_url',
-          image_url: { url: `data:image/jpeg;base64,${imageData.toString('base64')}` }
-        })
+          image_url: { url: `data:image/jpeg;base64,${imageData.toString('base64')}` },
+        });
       }
     }
 
-    data.messages = messages
+    data.messages = messages;
 
     const apiResult = await axios({
       url,
@@ -65,28 +82,28 @@ const openaiApis = async ({ model, prompt, images, apiKey, baseURL }) => {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
-        ...(apiKey && { Authorization: `Bearer ${apiKey}` })
-      }
-    })
+        ...(apiKey && { Authorization: `Bearer ${apiKey}` }),
+      },
+    });
 
-    return apiResult.data.choices[0].message.content
+    return apiResult.data.choices[0].message.content;
   } catch (err) {
-    throw new Error(err?.response?.data?.error?.message || err?.response?.data?.error || err.message)
+    throw new Error(err?.response?.data?.error?.message || err?.response?.data?.error || err.message);
   }
-}
+};
 
-module.exports = async options => {
+module.exports = async (options) => {
   try {
-    const { provider } = options
+    const { provider } = options;
 
     if (provider === 'ollama') {
-      return ollamaApis(options)
+      return ollamaApis(options);
     } else if (provider === 'openai' || provider === 'lm-studio') {
-      return openaiApis(options)
+      return openaiApis(options);
     } else {
-      throw new Error('🔴 No supported provider found')
+      throw new Error('🔴 No supported provider found');
     }
   } catch (err) {
-    throw new Error(err.message)
+    throw new Error(err.message);
   }
-}
+};
