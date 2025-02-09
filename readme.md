@@ -5,6 +5,10 @@ A Node.js CLI that uses Ollama and LM Studio models (Llava, Gemma, Llama etc.) t
 [![npm](https://img.shields.io/npm/v/ai-renamer.svg?style=flat-square)](https://www.npmjs.com/package/ai-renamer)
 [![license](https://img.shields.io/npm/l/ai-renamer?style=flat-square)](https://github.com/ozgrozer/ai-renamer/blob/main/license)
 
+## Desktop
+
+For the desktop app, visit [airenamer.app](https://airenamer.app)
+
 ## Preview
 
 Rename videos
